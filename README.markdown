@@ -63,6 +63,19 @@ This will automatically:
  * Use `git` to tag `v0.1.0` and push it
  * Build `hello-gem-0.1.0.gem` and push it to [rubygems.org](http://rubygems.org/gems/)
 
+
+### Releasing to Gem In A Box Local Gem Server
+
+	$ rake geminabox:release or rake geminabox_release
+	
+This will do everything Release above does and also automatically push your gem to your local gem server by geminabox
+
+Please configure geminabox first by 
+
+	$ gem inabox -config 
+
+To install geminabox or know more about it, visit https://github.com/cwninja/geminabox 
+
 ### Version bumping
 
 It feels good to release code. Do it, do it often. But before that, bump the version. Then release it. There's a few ways to update the version:

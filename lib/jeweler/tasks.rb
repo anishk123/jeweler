@@ -171,6 +171,15 @@ class Jeweler
       end
 
       task :release => 'git:release'
+      
+      namespace :geminabox do
+        desc "Tag a release in a local Gem In A Box. (happens by default with `rake geminabox_release`)"
+        task :release do
+          jeweler.release_to_geminabox
+        end
+      end
+
+      task :geminabox_release => 'geminabox:release'
 
       unless File.exist?('Gemfile')
         desc "Check that runtime and development dependencies are installed"

@@ -131,6 +131,10 @@ class Jeweler
   def release_to_git
     Jeweler::Commands::ReleaseToGit.build_for(self).run
   end
+  
+  def release_to_geminabox
+    Jeweler::Commands::ReleaseToGeminabox.build_for(self).run
+  end
 
   def release_gem_to_rubygems
     Jeweler::Commands::ReleaseToRubygems.build_for(self).run

@@ -6,6 +6,7 @@ class Jeweler
     autoload :ReleaseToGit, 'jeweler/commands/release_to_git'
     autoload :ReleaseGemspec, 'jeweler/commands/release_gemspec'
     autoload :ReleaseToRubygems, 'jeweler/commands/release_to_rubygems'
+    autoload :ReleaseToGeminabox, 'jeweler/commands/release_to_geminabox'
     autoload :ValidateGemspec, 'jeweler/commands/validate_gemspec'
     autoload :WriteGemspec, 'jeweler/commands/write_gemspec'
 
