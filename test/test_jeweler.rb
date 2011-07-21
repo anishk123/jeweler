@@ -155,6 +155,17 @@ class TestJeweler < Test::Unit::TestCase
 
     jeweler.release_to_git
   end
+  
+  should "build and run release to geminabox command when running release_to_geminabox" do
+    jeweler = build_jeweler
+
+    command = Object.new
+    mock(command).run
+
+    mock(Jeweler::Commands::ReleaseToGeminabox).build_for(jeweler) { command }
+
+    jeweler.release_to_geminabox
+  end
 
   should "respond to gemspec_helper" do
     assert_respond_to build_jeweler, :gemspec_helper

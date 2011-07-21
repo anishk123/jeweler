@@ -92,6 +92,47 @@ class Test::Unit::TestCase
       context "", &block
     end
   end
+  
+  def self.geminabox_command_context(description, &block)
+    context description do
+      setup do
+        @command = eval(self.class.name.gsub(/::Test/, '::')).new
+
+        if @command.respond_to? :gemspec_helper=
+          @gemspec_helper = Object.new
+          @command.gemspec_helper = @gemspec_helper
+        end
+        
+        @gemspec = Object.new
+        stub(@gemspec).file_name { 'zomg-1.2.3.gem' }
+
+        @gemspec_helper = Object.new
+        stub(@gemspec_helper).parse { @gemspec }
+        stub(@gemspec_helper).update_version
+        stub(@gemspec_helper).has_version? { false }
+
+        @version_helper = "Jeweler::VersionHelper"
+
+        @builder = Object.new
+        stub(Gem::Builder).new { @builder }
+        stub(@builder).build { 'zomg-1.2.3.gem' }
+
+        @file_utils = Object.new
+        stub(@file_utils).mkdir_p './pkg'
+        stub(@file_utils).mv './zomg-1.2.3.gem', './pkg'
+
+        @base_dir = '.'
+
+        @command.base_dir = @base_dir
+        @command.file_utils = @file_utils
+        @command.gemspec_helper = @gemspec_helper
+        @command.version_helper = @version_helper
+      end
+
+      context "", &block
+    end
+  end
+
 
   def self.rubyforge_command_context(description, &block)
     context description do

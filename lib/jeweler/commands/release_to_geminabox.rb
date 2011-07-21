@@ -18,13 +18,16 @@ class Jeweler
 
         pkg_dir = File.join(base_dir, 'pkg')
         file_utils.mkdir_p pkg_dir
-
-        gem_file_name = File.join(base_dir, gem_file_name)
-        file_utils.mv gem_file_name, pkg_dir
+        file_utils.mv File.join(base_dir, gem_file_name), pkg_dir
         
-        new_gem_file_name = File.join(base_dir, 'pkg', gem_file_name)
-        result = system "gem inabox #{new_gem_file_name}"
-        output.puts "Something went wrong. Please ensure you have configured Geminabox. Run gem inabox -config to configure." if !result
+        gem_file_name = File.join(base_dir, 'pkg', gem_file_name)
+        result = system "gem inabox #{gem_file_name}"
+        
+        if !result
+          output.puts "Something went wrong. Please ensure you have configured Geminabox. Run gem inabox -config to configure." 
+        else 
+          output.puts "Gem pushed to gem inabox server"
+        end
       end
 
       def self.build_for(jeweler)
